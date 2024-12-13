@@ -1,0 +1,18 @@
+.c-contact {
+  padding-block: 18rem 12rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+
+  & > * {
+    width: 50%;
+  }
+  h3 {
+    font-size: $fs--item-title;
+    font-weight: bold;
+  }
+
+  p {
+    padding-block: 1.5rem 3rem;
+  }
+}

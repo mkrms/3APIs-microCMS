@@ -1,0 +1,135 @@
+.p-home {
+  &__mv {
+    height: 50rem;
+    width: 100%;
+    margin-bottom: 20rem;
+    text-align: center;
+    position: relative;
+  }
+
+  &__title {
+    width: $width-container--top;
+    max-width: calc(1366px - 440px);
+
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    h1 {
+      font-size: $fs--title;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    span {
+      font-size: $fs--subtitle;
+      font-weight: bold;
+    }
+  }
+
+  &__business {
+    &__header {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid $color-border;
+      font-weight: bold;
+    }
+
+    &__list {
+      margin-block: 5rem;
+    }
+
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      gap: 3rem;
+
+      &:not(:last-child) {
+        margin-bottom: 8rem;
+      }
+
+      & > * {
+        width: 50%;
+      }
+
+      &:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      h3 {
+        font-size: $fs--item-title;
+        font-weight: bold;
+      }
+
+      p {
+        padding-block: 1.5rem 3rem;
+      }
+    }
+
+    &__button {
+      text-align: center;
+    }
+  }
+
+  &__company {
+    margin-block: 18rem;
+    background-color: $color-main;
+    padding: 4.5rem;
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    &__item {
+      width: calc(50% - 1.5rem);
+      height: 22rem;
+      padding: 5rem;
+      background-color: white;
+      a {
+        width: 100%;
+      }
+
+      h3 {
+        font-size: $fs--page-title;
+        font-weight: bold;
+        margin-bottom: 2rem;
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__articles {
+    &__list {
+      display: flex;
+      gap: 1.6rem;
+    }
+
+    &__item {
+      width: 33.3%;
+      img {
+        width: 100%;
+      }
+
+      div {
+        padding-block: 0.5rem;
+        font-size: $fs--small;
+        time {
+          margin-right: 1.5rem;
+        }
+
+        span {
+        }
+      }
+    }
+
+    &__button {
+      padding-top: 5rem;
+      text-align: center;
+    }
+  }
+}

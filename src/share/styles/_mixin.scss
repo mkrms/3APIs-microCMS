@@ -1,0 +1,17 @@
+@mixin sp {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin ov-sp {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin ov-pc {
+  @media screen and (min-width: 1367px) {
+    @content;
+  }
+}

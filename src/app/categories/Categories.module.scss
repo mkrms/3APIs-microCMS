@@ -1,0 +1,28 @@
+.p-categories {
+  &__list {
+  }
+
+  &__item {
+    text-align: center;
+    &:not(:last-child) {
+      margin-bottom: 12rem;
+    }
+    h3 {
+      font-size: $fs--item-title;
+      font-weight: bold;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    button {
+      margin-block: 3rem;
+    }
+
+    p {
+    }
+  }
+}

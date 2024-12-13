@@ -1,0 +1,37 @@
+.p-articles {
+  &__list {
+  }
+
+  &__item {
+    padding-bottom: 4rem;
+    border-bottom: 1px solid $color-border;
+
+    a {
+      display: flex;
+      gap: 3rem;
+    }
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+
+    img {
+      width: 25rem;
+    }
+  }
+
+  &__desc {
+    width: 100%;
+    div {
+      margin-bottom: 1rem;
+
+      time {
+        margin-right: 1.5rem;
+        font-size: $fs--small;
+      }
+
+      span {
+        font-size: $fs--small;
+      }
+    }
+  }
+}

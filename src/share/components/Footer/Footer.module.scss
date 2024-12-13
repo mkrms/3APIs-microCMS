@@ -1,0 +1,39 @@
+.c-footer {
+  background-color: #4a4a4a;
+  color: white;
+  &__wrapper {
+    width: calc(100% - 44rem);
+    margin-inline: auto;
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+    padding-block: 7rem;
+  }
+
+  &__company {
+    h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    gap: 10rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    margin-bottom: 1.5rem;
+    &.--parent {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+}

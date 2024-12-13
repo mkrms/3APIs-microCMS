@@ -1,7 +1,10 @@
 import React from 'react'
 import styles from './Articles.module.scss'
+import { getArticles } from '@/libs/client';
+import { toDate } from '@/libs/utils';
 
-function articles() {
+async function articles() {
+  const { contents: articles } = await getArticles();
   return (
     <div className={styles['p-articles']}>
       <div className="l-page__title">
@@ -9,54 +12,23 @@ function articles() {
       </div>
       <div className="l-container">
         <ul className={styles['p-articles__list']}>
-          <li className={styles['p-articles__item']}>
-            <a href="">
-              <img src="./img-thumbnail.png" alt="" />
-              <div className={styles['p-articles__desc']}>
-                <div>
-                  <time>2024/12/10</time>
-                  <span>カテゴリ</span>
-                </div>
-                <p>説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。</p>
-              </div>
-            </a>
-          </li>
-          <li className={styles['p-articles__item']}>
-            <a href="">
-              <img src="./img-thumbnail.png" alt="" />
-              <div className={styles['p-articles__desc']}>
-                <div>
-                  <time>2024/12/10</time>
-                  <span>カテゴリ</span>
-                </div>
-                <p>説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。</p>
-              </div>
-            </a>
-          </li>
-          <li className={styles['p-articles__item']}>
-            <a href="">
-              <img src="./img-thumbnail.png" alt="" />
-              <div className={styles['p-articles__desc']}>
-                <div>
-                  <time>2024/12/10</time>
-                  <span>カテゴリ</span>
-                </div>
-                <p>説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。</p>
-              </div>
-            </a>
-          </li>
-          <li className={styles['p-articles__item']}>
-            <a href="">
-              <img src="./img-thumbnail.png" alt="" />
-              <div className={styles['p-articles__desc']}>
-                <div>
-                  <time>2024/12/10</time>
-                  <span>カテゴリ</span>
-                </div>
-                <p>説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。</p>
-              </div>
-            </a>
-          </li>
+          {articles.map((article) => {
+            return (
+              <li className={styles['p-articles__item']} key={article.id}>
+                <a href={`/articles/${article.id}`}>
+                  <img src={article.thumbnail.url} alt="" />
+                  <div className={styles['p-articles__desc']}>
+                    <div>
+                      <time>{toDate(new Date(article.updatedAt))}</time>
+                      <span>{article.category && article.category.title}</span>
+                    </div>
+                    <p>{article.title}</p>
+                  </div>
+                </a>
+              </li>
+            )
+          })
+          }
         </ul>
       </div>
     </div>

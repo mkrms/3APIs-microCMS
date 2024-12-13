@@ -1,5 +1,5 @@
 // libs/microcms.ts
-import { createClient, MicroCMSImage } from 'microcms-js-sdk';
+import { createClient, MicroCMSDate, MicroCMSImage, MicroCMSListResponse, MicroCMSQueries } from 'microcms-js-sdk';
 
 // 環境変数にMICROCMS_SERVICE_DOMAINが設定されていない場合はエラーを投げる
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
@@ -31,8 +31,56 @@ export type Config = {
 
 //getリクエストでconfigを取得
 export const getConfig = async () => {
-  const topPageData = await client.get<Config>({
+  const configData = await client.get<Config>({
     endpoint: "config",
   })
-  return topPageData;
+  return configData;
+}
+
+export type Category = {
+  id: string;
+  title: string;
+  thumbnail: MicroCMSImage;
+  overview: string;
+  body: string;
+} & MicroCMSDate;
+
+export const getCategories = async (queries?: MicroCMSQueries): Promise<MicroCMSListResponse<Category>> => {
+  const listData = await client.getList<Category>({
+    endpoint: "categories",
+    queries,
+  });
+  return listData
+};
+
+export const getCategory = async (id: string) => {
+  const data = await client.get({
+    endpoint: "categories",
+    contentId: `${id}`,
+  });
+  return data;
+}
+
+export type Article = {
+  id: string;
+  title: string;
+  thumbnail: MicroCMSImage;
+  body: string;
+  category: Category;
+} & MicroCMSDate;
+
+export const getArticles = async (queries?: MicroCMSQueries): Promise<MicroCMSListResponse<Article>> => {
+  const listData = await client.getList<Article>({
+    endpoint: "articles",
+    queries,
+  });
+  return listData
+};
+
+export const getArticle = async (id: string) => {
+  const data = await client.get({
+    endpoint: "articles",
+    contentId: `${id}`,
+  });
+  return data;
 }

@@ -58,7 +58,9 @@ html {
 
 .p-single {
   &__title {
-    font-size: $fs--page-title;
+    font-size: $fs--item-title;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
   }
 
   &__thumbnail {
@@ -66,6 +68,7 @@ html {
   }
 
   &__desc {
+    margin-bottom: 1.5rem;
     time {
       font-size: $fs--small;
       margin-right: 1.5rem;
@@ -78,5 +81,12 @@ html {
 
   img {
     width: 100%;
+    margin-bottom: 5rem;
+  }
+
+  &__body {
+    & > * {
+      padding-block: 1.5rem;
+    }
   }
 }

@@ -3,6 +3,7 @@
   color: white;
   &__wrapper {
     width: calc(100% - 44rem);
+    max-width: calc(1366px - 440px);
     margin-inline: auto;
     display: flex;
     align-items: top;

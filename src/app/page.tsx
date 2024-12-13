@@ -1,18 +1,23 @@
 import Link from 'next/link';
-import { client } from '../libs/client';
+import { client, getArticles, getCategories, getConfig } from '../libs/client';
 import { MicroCMSImage } from 'microcms-js-sdk';
 import styles from './Home.module.scss'
 import Button from '@/share/components/Button/Button';
+import { toDate } from '@/libs/utils';
 
 export default async function Home() {
+  const config = await getConfig();
+  const { contents: categories } = await getCategories();
+  const { contents: articles } = await getArticles();
+
   return (
     <div className={styles['p-home']}>
 
       {/* mv */}
       <div className={styles['p-home__mv']}>
         <div className={styles['p-home__title']}>
-          <h1>サイトタイトルが入ります。サイトタイトルが入ります。</h1>
-          <span>サブタイトルが入ります。</span>
+          <h1>{config.title}</h1>
+          <span>{config.subtitle}</span>
         </div>
       </div>
 
@@ -22,38 +27,19 @@ export default async function Home() {
           <h2 className={styles['p-home__business__header']}>事業紹介</h2>
 
           <ul className={styles['p-home__business__list']}>
-            <li className={styles['p-home__business__item']}>
-              <div>
-                <h3>カテゴリタイトル</h3>
-                <p>カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。</p>
-                <Button color="gray" href="/categories">詳細</Button>
-              </div>
-              <img src="./img-thumbnail.png" alt="" />
-            </li>
-            <li className={styles['p-home__business__item']}>
-              <div>
-                <h3>カテゴリタイトル</h3>
-                <p>カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。</p>
-                <Button color="gray" href="/categories">詳細</Button>
-              </div>
-              <img src="./img-thumbnail.png" alt="" />
-            </li>
-            <li className={styles['p-home__business__item']}>
-              <div>
-                <h3>カテゴリタイトル</h3>
-                <p>カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。</p>
-                <Button color="gray" href="/categories">詳細</Button>
-              </div>
-              <img src="./img-thumbnail.png" alt="" />
-            </li>
-            <li className={styles['p-home__business__item']}>
-              <div>
-                <h3>カテゴリタイトル</h3>
-                <p>カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。カテゴリの説明が入ります。</p>
-                <Button color="gray" href="/categories">詳細</Button>
-              </div>
-              <img src="./img-thumbnail.png" alt="" />
-            </li>
+            {categories.map((category) => {
+              return (
+                <li className={styles['p-home__business__item']} key={category.id}>
+                  <div>
+                    <h3>{category.title}</h3>
+                    <p>{category.overview}</p>
+                    <Button color="gray" href={`/categories/${category.id}`}>詳細</Button>
+                  </div>
+                  <img src={category.thumbnail.url} alt="" />
+                </li>
+              )
+            })
+            }
           </ul>
 
           <div className={styles['p-home__business__button']}>
@@ -64,25 +50,25 @@ export default async function Home() {
         <section className={styles['p-home__company']}>
           <ul className={styles['p-home__company__list']}>
             <li className={styles['p-home__company__item']}>
-              <a href="/">
+              <a href="/company">
                 <h3>Company</h3>
                 <span>会社概要</span>
               </a>
             </li>
             <li className={styles['p-home__company__item']}>
-              <a href="/">
+              <a href="/message">
                 <h3>代表挨拶</h3>
                 <span>CEO Message</span>
               </a>
             </li>
             <li className={styles['p-home__company__item']}>
-              <a href="/">
+              <a href="/history">
                 <h3>History</h3>
                 <span>沿革</span>
               </a>
             </li>
             <li className={styles['p-home__company__item']}>
-              <a href="/">
+              <a href="/member">
                 <h3>Member</h3>
                 <span>経営メンバー</span>
               </a>
@@ -93,36 +79,21 @@ export default async function Home() {
         <section className={styles['p-home__articles']}>
           <ul className={styles['p-home__articles__list']}>
             {/* max3つ */}
-            <li className={styles['p-home__articles__item']}>
-              <a href="">
-                <img src="./img-thumbnail.png" alt="" />
-                <div>
-                  <time>2024/12/10</time>
-                  <span>カテゴリ</span>
-                </div>
-                <p>説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。</p>
-              </a>
-            </li>
-            <li className={styles['p-home__articles__item']}>
-              <a href="">
-                <img src="./img-thumbnail.png" alt="" />
-                <div>
-                  <time>2024/12/10</time>
-                  <span>カテゴリ</span>
-                </div>
-                <p>説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。</p>
-              </a>
-            </li>
-            <li className={styles['p-home__articles__item']}>
-              <a href="">
-                <img src="./img-thumbnail.png" alt="" />
-                <div>
-                  <time>2024/12/10</time>
-                  <span>カテゴリ</span>
-                </div>
-                <p>説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。説明が入ります。</p>
-              </a>
-            </li>
+            {articles.slice(0, 3).map((article) => {
+              return (
+                <li className={styles['p-home__articles__item']} key={article.id}>
+                  <a href={`/articles/${article.id}`}>
+                    <img src={article.thumbnail.url} alt="" />
+                    <div>
+                      <time>{toDate(new Date(article.updatedAt))}</time>
+                      <span>{article.category && article.category.title}</span>
+                    </div>
+                    <p>{article.title}</p>
+                  </a>
+                </li>
+              )
+            })
+            }
           </ul>
           <div className={styles['p-home__articles__button']}>
             <Button color='gray' href='/articles'>記事一覧</Button>

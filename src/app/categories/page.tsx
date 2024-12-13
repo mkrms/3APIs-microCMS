@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "./Categories.module.scss"
 import Button from '@/share/components/Button/Button'
 import { getCategories } from '@/libs/client';
+import Image from 'next/image';
 
 async function categories() {
   const { contents: categories } = await getCategories();
@@ -17,7 +18,7 @@ async function categories() {
             return (
               <li className={styles['p-categories__item']} key={category.id}>
                 <h3>{category.title}</h3>
-                <img src={category.thumbnail.url} alt="" />
+                <Image src={category.thumbnail.url} alt="" />
                 <Button color="gray" href={`/categories/${category.id}`}>詳細</Button>
                 <p>{category.overview}</p>
               </li>

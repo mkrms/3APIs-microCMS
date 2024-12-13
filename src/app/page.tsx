@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import { client, getArticles, getCategories, getConfig } from '../libs/client';
-import { MicroCMSImage } from 'microcms-js-sdk';
+
+import { getArticles, getCategories, getConfig } from '../libs/client';
 import styles from './Home.module.scss'
 import Button from '@/share/components/Button/Button';
 import { toDate } from '@/libs/utils';
+import Image from 'next/image';
 
 export default async function Home() {
   const config = await getConfig();
@@ -35,7 +35,7 @@ export default async function Home() {
                     <p>{category.overview}</p>
                     <Button color="gray" href={`/categories/${category.id}`}>詳細</Button>
                   </div>
-                  <img src={category.thumbnail.url} alt="" />
+                  <Image src={category.thumbnail.url} alt="" />
                 </li>
               )
             })
@@ -83,7 +83,7 @@ export default async function Home() {
               return (
                 <li className={styles['p-home__articles__item']} key={article.id}>
                   <a href={`/articles/${article.id}`}>
-                    <img src={article.thumbnail.url} alt="" />
+                    <Image src={article.thumbnail.url} alt="" />
                     <div>
                       <time>{toDate(new Date(article.updatedAt))}</time>
                       <span>{article.category && article.category.title}</span>

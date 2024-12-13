@@ -3,6 +3,7 @@ import styles from './Article.module.scss'
 import { getArticle } from '@/libs/client';
 import parse from 'html-react-parser'
 import { toDate } from '@/libs/utils';
+import Image from 'next/image';
 
 async function article({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -20,7 +21,7 @@ async function article({ params }: { params: Promise<{ id: string }> }) {
             <time>{toDate(new Date(article.updatedAt))}</time>
             <span>{article.category && article.category.title}</span>
           </div>
-          <img src={article.thumbnail.url} alt="" className='p-single__thumbnail' />
+          <Image src={article.thumbnail.url} alt="" className='p-single__thumbnail' />
           <div className="p-single__body">
             {parse(article.body)}
           </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Articles.module.scss'
 import { getArticles } from '@/libs/client';
 import { toDate } from '@/libs/utils';
+import Image from 'next/image';
 
 async function articles() {
   const { contents: articles } = await getArticles();
@@ -16,7 +17,7 @@ async function articles() {
             return (
               <li className={styles['p-articles__item']} key={article.id}>
                 <a href={`/articles/${article.id}`}>
-                  <img src={article.thumbnail.url} alt="" />
+                  <Image src={article.thumbnail.url} alt="" />
                   <div className={styles['p-articles__desc']}>
                     <div>
                       <time>{toDate(new Date(article.updatedAt))}</time>
